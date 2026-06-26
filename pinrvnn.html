@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="az" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BobaVibe - Sadəcə bir içki deyil. Əsl asılılıqdır.</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js (Yüngül minimalist interaktivlik üçün) -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome İkonları -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #faf8f5;
+        }
+        /* Zərif minimalist scrollbar */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fcfbfa;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e5ded4;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #baa592;
+        }
+    </style>
+</head>
+<body class="text-[#2d2219] antialiased" x-data="{ cartCount: 0, showPromoModal: false, emailSubscribed: false, emailInput: '' }">
+
+    <!-- 1. HEADER & HERO BÖLMƏSİ (Screenshot 2026-06-08 at 19.14.47.jpg-ə uyğun südlü-karamel dizayn) -->
+    <header class="mx-3 mt-3 overflow-hidden rounded-[2.5rem] bg-gradient-to-b from-[#dfd5c6] to-[#bca693] relative shadow-xs">
+        <!-- Arxa fondakı zərif südlü boba sprey effekti overlay -->
+        <div class="absolute inset-0 opacity-25 bg-cover bg-center mix-blend-overlay" style="background-image: url('https://images.unsplash.com/photo-1541658016709-82535e94bc69?auto=format&fit=crop&w=1200&q=80');"></div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-6">
+            <!-- Navbar -->
+            <nav class="py-5 flex items-center justify-between" x-data="{ mobileMenu: false }">
+                <!-- Logo -->
+                <a href="#" class="text-sm font-black tracking-tight text-[#1a110b] hover:opacity-80 transition flex items-center gap-1.5">
+                    <span class="text-xs">🧋</span>
+                    <span>BobaVibe</span>
+                </a>
+                
+                <!-- Masaüstü Linklər (Ultra Minimalist) -->
+                <div class="hidden md:flex items-center space-x-8 text-[11px] font-semibold uppercase tracking-wider text-[#4a3a2e]">
+                    <a href="#menu" class="hover:text-black transition">Menyu</a>
+                    <a href="#about" class="hover:text-black transition">Hekayəmiz</a>
+                    <a href="#reviews" class="hover:text-black transition">Vibe Check</a>
+                    <a href="#subscribe" class="hover:text-black transition">Bizə Qoşul</a>
+                </div>
+
+                <!-- Sifariş Düyməsi -->
+            
+
+                <!-- Mobil Açılan Menyu -->
+                <div x-show="mobileMenu" x-transition @click.outside="mobileMenu = false" class="absolute top-16 left-3 right-3 bg-white/95 backdrop-blur-md rounded-2xl p-4 shadow-lg flex flex-col space-y-2 md:hidden z-50 border border-[#ede9df]" style="display: none;">
+                    <a @click="mobileMenu = false" href="#menu" class="text-xs font-bold text-[#1a110b] py-2 border-b border-gray-50">Menyu</a>
+                    <a @click="mobileMenu = false" href="#about" class="text-xs font-bold text-[#1a110b] py-2 border-b border-gray-50">Hekayəmiz</a>
+                    <a @click="mobileMenu = false" href="#reviews" class="text-xs font-bold text-[#1a110b] py-2 border-b border-gray-50">Vibe Check</a>
+                    <a @click="mobileMenu = false" href="#subscribe" class="text-xs font-bold text-[#1a110b] py-2">Bizə Qoşul</a>
+                </div>
+            </nav>
+
+            <!-- Hero Mətn və Düymələr -->
+            <div class="text-center pt-16 pb-24 md:pt-24 md:pb-32 max-w-xl mx-auto">
+                <h1 class="text-3xl md:text-[2.75rem] font-black tracking-tight text-[#1a110b] leading-none">
+                    Sadəcə bir içki deyil.<br>
+                    <span class="text-[#724629] relative inline-block">
+                        Əsl asılılıqdır.
+                    </span>
+                </h1>
+                
+                <p class="mt-4 text-[11px] md:text-xs text-[#4a3b30] max-w-sm mx-auto font-medium leading-relaxed opacity-95">
+                    Şirin ehtiyacınızı tamamilə qarşılayacaq, hər qurtumda premium dad və təravət bəxş edən təzə hazırlanmış boba çayları və kokteyllər.
+                </p>
+
+                <!-- Hero Düymələri -->
+                <div class="mt-6 flex justify-center gap-3">
+                    <a href="#menu" class="bg-[#00ffd5] text-black text-[10px] font-bold uppercase tracking-wider px-6 py-3 rounded-full shadow-xs hover:bg-[#00e6c0] transition transform hover:scale-105 duration-200">
+                        Sifariş Et
+                    </a>
+                    <a href="#menu" class="bg-[#f0e9dd]/80 text-[#333] text-[10px] font-bold uppercase tracking-wider px-6 py-3 rounded-full hover:bg-[#e4dbcc] transition backdrop-blur-xs">
+                        Menyunu Gör
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. SOCIAL PROOF / METRIKLƏR (Minimalist Sosial Sübut) -->
+    <section class="max-w-xl mx-auto px-4 py-6 flex items-center justify-center gap-6 text-[10px] font-bold text-[#5a4b3e] tracking-wider uppercase">
+        <div class="flex items-center space-x-1.5">
+            <span class="text-[#724629] text-xs">★</span>
+            <span>4.9/5 — 10k+ müştəri rəyi</span>
+        </div>
+        <div class="w-1.5 h-1.5 bg-[#d0c5b4] rounded-full"></div>
+        <div class="flex items-center space-x-1.5">
+            <span>🧋 50k+ satılan içki</span>
+        </div>
+    </section>
+
+    <!-- 3. THE CRAVING LIST (Ən Çox Sevilənlər Bölməsi) -->
+    <section id="menu" class="max-w-6xl mx-auto px-3 py-4">
+        <div class="bg-white rounded-[2rem] p-6 md:p-10 shadow-xs border border-[#eeebe3]">
+            
+            <!-- Başlıq -->
+            <div class="text-center mb-8">
+                <h2 class="text-xl md:text-2xl font-black text-[#111]">Ən Çox Sevilənlər</h2>
+                <p class="text-[10px] text-gray-400 mt-1 uppercase tracking-widest font-semibold">Bizim əsas ulduzlarımız. Asılılıq yaratmağa hazırdırlar.</p>
+            </div>
+
+            <!-- 3 Məhsul Kartı Grid-i (Şəkilə tam uyğun minimalist kartlar) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                
+                <!-- Kart 1: Brown Sugar Boba Storm -->
+                <div class="group bg-[#fdfcf9] rounded-2xl overflow-hidden border border-[#ede9e0] hover:border-gray-300 transition duration-300">
+                    <div class="h-56 overflow-hidden bg-black relative">
+                        <span class="absolute top-2 right-2 bg-[#ffb7cb] text-[#5c1d2e] text-[8px] font-bold px-2 py-0.5 rounded-full z-10 uppercase tracking-wider">Bestseller</span>
+                        <img src="https://images.unsplash.com/photo-1541658016709-82535e94bc69?q=80&w=600&auto=format&fit=crop" alt="Qəhvəyi Şəkər Boba Fırtınası" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-xs text-[#1a110b]">Qəhvəyi Şəkər Boba Fırtınası</h3>
+                        <div class="mt-3 flex items-center justify-between">
+                            <span class="text-xs font-black text-[#724629]">6.50 AZN</span>
+                            <button @click="cartCount++; $dispatch('notify')" class="bg-[#00ffd5] text-black text-[9px] font-extrabold uppercase tracking-wider px-3.5 py-1.5 rounded-full hover:bg-[#00e6c0] transition">Dadına Bax</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kart 2: Strawberry Cloud Shake -->
+                <div class="group bg-[#fdfcf9] rounded-2xl overflow-hidden border border-[#ede9e0] hover:border-gray-300 transition duration-300">
+                    <div class="h-56 overflow-hidden bg-[#ffe8ec]">
+                        <img src="https://images.unsplash.com/photo-1579954115545-a95591f28bfc?q=80&w=600&auto=format&fit=crop" alt="Çiyələkli Bulud Şeyk" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-xs text-[#1a110b]">Çiyələkli Bulud Şeyk</h3>
+                        <div class="mt-3 flex items-center justify-between">
+                            <span class="text-xs font-black text-[#724629]">7.00 AZN</span>
+                            <button @click="cartCount++; $dispatch('notify')" class="bg-[#eae5dc] text-black text-[9px] font-extrabold uppercase tracking-wider px-3.5 py-1.5 rounded-full hover:bg-[#dfd9cd] transition">Dadına Bax</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kart 3: Mango Burst Tea -->
+                <div class="group bg-[#fdfcf9] rounded-2xl overflow-hidden border border-[#ede9e0] hover:border-gray-300 transition duration-300">
+                    <div class="h-56 overflow-hidden bg-[#ffb84d]">
+                        <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=600&auto=format&fit=crop" alt="Manqo Partlayış Çayı" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-xs text-[#1a110b]">Manqo Partlayış Çayı</h3>
+                        <div class="mt-3 flex items-center justify-between">
+                            <span class="text-xs font-black text-[#724629]">6.00 AZN</span>
+                            <button @click="cartCount++; $dispatch('notify')" class="bg-[#eae5dc] text-black text-[9px] font-extrabold uppercase tracking-wider px-3.5 py-1.5 rounded-full hover:bg-[#dfd9cd] transition">Dadına Bax</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. KEY VALUES / ÜSTÜNLÜKLƏR BÖLMƏSİ (Şəkildəki ikonlu zərif sətir) -->
+    <section class="max-w-5xl mx-auto px-4 py-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            
+            <!-- Üstünlük 1 -->
+            <div class="flex flex-col items-center">
+                <div class="w-9 h-9 rounded-full bg-[#ffd6df] flex items-center justify-center text-xs shadow-xs mb-2">
+                    💎
+                </div>
+                <h4 class="text-[10px] font-bold text-[#111] uppercase tracking-wider">Premium Tərkib</h4>
+                <p class="text-[9px] text-gray-400 mt-1 max-w-[140px] leading-normal mx-auto">Qlobal səviyyədə seçilən, yerli və təzə hazırlanan boba inciləri.</p>
+            </div>
+
+            <!-- Üstünlük 2 -->
+            <div class="flex flex-col items-center">
+                <div class="w-9 h-9 rounded-full bg-[#ffdcc2] flex items-center justify-center text-xs shadow-xs mb-2">
+                    🍊
+                </div>
+                <h4 class="text-[10px] font-bold text-[#111] uppercase tracking-wider">Təzə Çalınmış</h4>
+                <p class="text-[9px] text-gray-400 mt-1 max-w-[140px] leading-normal mx-auto">Mükəmməl məxməri köpük qatı üçün hər sifariş fərdi şəkildə çalınır.</p>
+            </div>
+
+            <!-- Üstünlük 3 -->
+            <div class="flex flex-col items-center">
+                <div class="w-9 h-9 rounded-full bg-[#a3fff0] flex items-center justify-center text-xs shadow-xs mb-2">
+                    💚
+                </div>
+                <h4 class="text-[10px] font-bold text-[#111] uppercase tracking-wider">Dad Asılılığı</h4>
+                <p class="text-[9px] text-gray-400 mt-1 max-w-[140px] leading-normal mx-auto">Həqiqi dad balansını tapmaq üçün yüzlərlə sınaqdan keçmiş xüsusi reseptlər.</p>
+            </div>
+
+            <!-- Üstünlük 4 -->
+            <div class="flex flex-col items-center">
+                <div class="w-9 h-9 rounded-full bg-[#e2e1ff] flex items-center justify-center text-xs shadow-xs mb-2">
+                    ⚡
+                </div>
+                <h4 class="text-[10px] font-bold text-[#111] uppercase tracking-wider">Sürətli Təhvil</h4>
+                <p class="text-[9px] text-gray-400 mt-1 max-w-[140px] leading-normal mx-auto">Növbə gözləmədən əvvəlcədən onlayn sifariş edin və dərhal götürün.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 5. SPLITTED BANNER (Şəkilə tam uyğun boba çayı və karamel fonlu iki hissəli blok) -->
+    <section id="about" class="max-w-6xl mx-auto px-3 py-4">
+        <div class="overflow-hidden rounded-[2rem] bg-gradient-to-r from-stone-900 to-stone-800 border border-stone-800 shadow-md">
+            <div class="grid grid-cols-1 md:grid-cols-2 items-center">
+                
+                <!-- Sol tərəf: Əla keyfiyyətli klassik boba çayı görseli -->
+                <div class="h-64 md:h-80 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1507133750040-4a8f57021571?q=80&w=800&auto=format&fit=crop" alt="Əsl Boba Craftı" class="w-full h-full object-cover">
+                    <!-- Qaranlıq gradient overlay -->
+                    <div class="absolute inset-0 bg-black/10"></div>
+                </div>
+
+                <!-- Sağ tərəf: Zərif minimalist karamel rəngli mətn bloku -->
+                <div class="bg-[#bca693] p-8 md:p-12 text-[#23170e] flex flex-col justify-center h-full">
+                    <h3 class="text-lg md:text-xl font-black leading-tight tracking-tight uppercase">
+                        Hər qurtum unikal dad üçün hazırlanır.
+                    </h3>
+                    <p class="mt-3 text-[11px] leading-relaxed text-[#443224] font-medium opacity-95">
+                        Biz sadəcə içkiləri qarışdırmırıq, təcrübə yaradırıq. Mükəmməl bişmiş boba dənələrindən tutmuş, xüsusi süd qarışıqlarımızın məxməri teksturasına kəşf ediləcək çox şey var.
+                    </p>
+                    <div class="mt-5">
+                        <a href="#menu" class="inline-block border border-[#443224] text-[#443224] text-[9px] font-bold uppercase tracking-widest px-5 py-2.5 rounded-full hover:bg-[#443224] hover:text-[#bca693] transition duration-200">
+                            Hazırlanma Prosesimiz
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. PROMO RIBBON (Firuzəyi rəngli zolaq) -->
+    <section class="max-w-6xl mx-auto px-3 py-2">
+        <div class="bg-[#00ffd5] text-black rounded-xl px-5 py-3 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-xs">
+            <div class="flex items-center space-x-2 text-[10px] font-extrabold uppercase tracking-wider">
+                <span>🔥</span>
+                <span>Yalnız Bu Gün: 2 al, 1 hədiyyə qazan!</span>
+            </div>
+            <button @click="showPromoModal = true" class="bg-black text-white text-[8px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-lg hover:bg-stone-900 transition active:scale-95">
+                Təklifi Al
+            </button>
+        </div>
+    </section>
+
+    <!-- 7. THE VIBE CHECK (Atmosfer Yoxlanışı bölməsi) -->
+    <section id="reviews" class="max-w-6xl mx-auto px-3 py-6">
+        <div class="text-center mb-6">
+            <h2 class="text-base md:text-lg font-black uppercase tracking-wider text-[#1a110b]">Atmosfer Yoxlanışı</h2>
+            <p class="text-[9px] text-gray-400 mt-0.5 uppercase tracking-widest font-semibold">Bizimlə o xüsusi hissi yaşayın</p>
+        </div>
+
+        <!-- 3 Sütunlu minimalist şəkil qalereyası -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- Şəkil 1 -->
+            <div class="rounded-2xl overflow-hidden h-48 md:h-56 relative group border border-[#eeebe3]">
+                <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=600&auto=format&fit=crop" alt="BobaVibe Kafe Estetikası" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                <div class="absolute inset-0 bg-black/10"></div>
+            </div>
+            <!-- Şəkil 2 -->
+            <div class="rounded-2xl overflow-hidden h-48 md:h-56 relative group border border-[#eeebe3]">
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=600&auto=format&fit=crop" alt="Boba ilə xoş anlar" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                <div class="absolute inset-0 bg-black/10"></div>
+            </div>
+            <!-- Şəkil 3 -->
+            <div class="rounded-2xl overflow-hidden h-48 md:h-56 relative group border border-[#eeebe3]">
+                <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=600&auto=format&fit=crop" alt="Aesthetic boba drink closer" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                <div class="absolute inset-0 bg-black/10"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. THE HYPE IS REAL (Rəylər) -->
+    <section class="max-w-5xl mx-auto px-4 py-6 bg-[#f7f4ee] rounded-3xl border border-[#ede9df] my-4">
+        <div class="text-center mb-6">
+            <h2 class="text-xs font-black uppercase tracking-widest text-[#1a110b]">Hər kəs bundan danışır</h2>
+            <p class="text-[9px] text-gray-400 mt-0.5 uppercase tracking-widest font-semibold">Müştərilərimizin səmimi şərhləri</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            
+            <!-- Rəy 1 -->
+            <div class="bg-white rounded-xl p-4 border border-[#ede9df] shadow-xs flex flex-col justify-between">
+                <div>
+                    <div class="flex space-x-0.5 text-[#724629] text-[9px] mb-2">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <p class="text-[10px] text-gray-500 italic leading-relaxed">"Həqiqətən həftədə 4 dəfə bura gəlirəm. Mənə kömək edin (yaxud daha çox boba göndərin)."</p>
+                </div>
+                <div class="mt-3 border-t border-gray-50 pt-2 text-[9px] font-bold text-gray-400 uppercase tracking-widest">
+                    — TAYLAH L.
+                </div>
+            </div>
+
+            <!-- Rəy 2 -->
+            <div class="bg-white rounded-xl p-4 border border-[#ede9df] shadow-xs flex flex-col justify-between">
+                <div>
+                    <div class="flex space-x-0.5 text-[#724629] text-[9px] mb-2">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <p class="text-[10px] text-gray-500 italic leading-relaxed">"Qəhvəyi Şəkər Fırtınası mənim üçün bütün digər boba çaylarını kölgədə qoydu. Mükəmməldir."</p>
+                </div>
+                <div class="mt-3 border-t border-gray-50 pt-2 text-[9px] font-bold text-gray-400 uppercase tracking-widest">
+                    — MIKEY T.
+                </div>
+            </div>
+
+            <!-- Rəy 3 -->
+            <div class="bg-white rounded-xl p-4 border border-[#ede9df] shadow-xs flex flex-col justify-between">
+                <div>
+                    <div class="flex space-x-0.5 text-[#724629] text-[9px] mb-2">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <p class="text-[10px] text-gray-500 italic leading-relaxed">"Estetika 10/10, içkilər isə 11/10-dur. Şəhərdəki ən yaxşı ab-hava buradadır."</p>
+                </div>
+                <div class="mt-3 border-t border-gray-50 pt-2 text-[9px] font-bold text-gray-400 uppercase tracking-widest">
+                    — PETER C.
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 9. JOIN THE BUBBLE CLUB (Abunəlik bölməsi) -->
+    <section id="subscribe" class="max-w-2xl mx-auto px-4 py-8 text-center">
+        <h2 class="text-base md:text-lg font-black uppercase tracking-wider text-[#1a110b]">Bubble Kluba Qoşulun</h2>
+        <p class="text-[10px] text-gray-400 mt-1 max-w-xs mx-auto leading-relaxed">Yeni dadlara, gizli menyu elementlərinə və ad gününüzə xüsusi pulsuz içkilərə ilk siz sahib olun.</p>
+        
+        <!-- Abunəlik Formu -->
+        <div class="mt-5 max-w-sm mx-auto flex items-center space-x-2 bg-white border border-[#eeebe3] rounded-full p-1 shadow-xs">
+            <input type="email" x-model="emailInput" placeholder="E-poçt ünvanınız" class="bg-transparent pl-4 pr-2 py-1.5 text-[10px] w-full focus:outline-none text-[#1a110b]">
+            <button @click="if (emailInput.includes('@')) { emailSubscribed = true; emailInput = ''; } else { alert('E-poçt ünvanınızı daxil edin'); }" class="bg-[#724629] text-white text-[9px] font-bold uppercase tracking-wider px-5 py-2 rounded-full hover:bg-[#5a361e] transition">
+                Qoşul
+            </button>
+        </div>
+
+        <!-- Uğurlu abunəlik mesajı -->
+        <div x-show="emailSubscribed" x-transition class="mt-3 text-[10px] font-bold text-emerald-600">
+            🎉 Təbriklər! Kluba uğurla qoşuldunuz.
+        </div>
+    </section>
+
+    <!-- 10. FOOTER -->
+    <footer class="bg-[#1e140d] text-[#f7f4ee]/80 py-8 border-t border-[#33251c]">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4 border-b border-[#33251c] pb-6">
+                <!-- Sol: Logo -->
+                <a href="#" class="text-sm font-black text-white flex items-center gap-1">
+                    <span class="text-xs">🧋</span>
+                    <span>BobaVibe</span>
+                </a>
+
+                <!-- Orta: Linklər -->
+                <div class="flex flex-wrap justify-center gap-6 text-[9px] uppercase tracking-widest font-bold">
+                    <a href="#" class="hover:text-white transition">Gizlilik Siyasəti</a>
+                    <a href="#" class="hover:text-white transition">İstifadə Şərtləri</a>
+                    <a href="#" class="hover:text-white transition">Karyera</a>
+                    <a href="#" class="hover:text-white transition">Əlaqə</a>
+                </div>
+
+                <!-- Sağ: Kopyalayaraq bəslənilən vibe statusu -->
+                <div class="text-[9px] text-gray-500 uppercase tracking-wider">
+                    © 2026 BobaVibe. Həmişə Pozitiv Qalın.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- İnteraktiv: Promo Təklif Modal pəncərəsi -->
+    <div x-show="showPromoModal" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" x-transition style="display: none;">
+        <div class="bg-white rounded-2xl max-w-xs w-full p-5 text-center border border-gray-100 shadow-2xl relative" @click.outside="showPromoModal = false">
+            <button @click="showPromoModal = false" class="absolute top-2 right-3 text-gray-400 hover:text-black">
+                <i class="fa-solid fa-xmark text-sm"></i>
+            </button>
+            <span class="text-xl">🧋</span>
+            <h4 class="text-xs font-black uppercase tracking-wider text-[#1a110b] mt-2">Özəl Kampaniya Kodu</h4>
+            <p class="text-[10px] text-gray-400 mt-1">2 al, 1 hədiyyə təklifindən yararlanmaq üçün kodu kassaya təqdim edin:</p>
+            <div class="my-3 bg-[#fcfbfa] p-2 rounded-lg border border-dashed border-[#d8d2c4] text-xs font-black tracking-widest text-[#724629]">
+                BOBAVIBE2026
+            </div>
+            <button @click="showPromoModal = false" class="bg-[#00ffd5] text-black text-[9px] font-extrabold uppercase tracking-widest py-2 px-5 rounded-full w-full">
+                Kodu Kopyala və Bağla
+            </button>
+        </div>
+    </div>
+
+    <!-- İnteraktiv: Səbətə əlavə olundu bildirişi -->
+    <div x-data="{ showNotification: false }" @notify.window="showNotification = true; setTimeout(() => showNotification = false, 2500)" class="fixed bottom-4 right-4 z-50">
+        <div x-show="showNotification" x-transition class="bg-black text-white rounded-lg px-4 py-2.5 shadow-lg border border-stone-800 text-[10px] font-bold uppercase tracking-wider flex items-center space-x-2">
+            <span>✅</span>
+            <span>İçki uğurla səbətə atıldı!</span>
+        </div>
+    </div>
+
+</body>
+</html>
